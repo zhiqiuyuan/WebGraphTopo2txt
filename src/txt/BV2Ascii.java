@@ -28,58 +28,64 @@ package txt;
  *
  */
 
-
 import it.unimi.dsi.webgraph.ImmutableGraph;
 import it.unimi.dsi.webgraph.NodeIterator;
 
 //import java.lang.reflect.InvocationTargetException;
 import java.io.*;
 
-/** The main method of this class loads an arbitrary {@link it.unimi.dsi.webgraph.ImmutableGraph}
- * and performs a sequential scan to establish the minimum, maximum and average outdegree.
+/**
+ * The main method of this class loads an arbitrary
+ * {@link it.unimi.dsi.webgraph.ImmutableGraph}
+ * and performs a sequential scan to establish the minimum, maximum and average
+ * outdegree.
  */
 
 public class BV2Ascii {
-    
-    private BV2Ascii() {}
-    
-    public static void process(String path_input, String path_output) throws  ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, IOException{
-    	final ImmutableGraph graph = it.unimi.dsi.webgraph.ImmutableGraph.loadOffline( path_input );
-    	
-    	NodeIterator nodeIterator = graph.nodeIterator();
-    	int curr, d;
-    	int[] suc;
-    	
-    	BufferedWriter bout = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path_output)));
-    	
-    	long cnt = 0;
-    	while( nodeIterator.hasNext() ) {
-    		curr = nodeIterator.nextInt();
-    		d = nodeIterator.outdegree();
-    		suc = nodeIterator.successorArray();
 
-    		//outStream.print( curr );
-    		for( int j=0; j<d; j++ ) {
-    			bout.write( curr + "," + suc[j] + "\n" );
-    			++cnt;
-    			if( cnt % 10000 == 0 )
-    				System.out.println(cnt);
-    		}
-    		//outStream.println();
-    	}
-    	
-    	bout.close();
-    	System.out.println( "finish" );
-    }
-    
-    /*
-    static public void main( String arg[] ) throws ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, IOException {
-    	if ( arg.length != 1 ) {
-    		System.err.println( "Usage: BV2Ascii BASENAME" );
-    		return;
-    	}
-    	
-    	process(arg[0]);
-    }
-    */
+	private BV2Ascii() {
+	}
+
+	public static void process(String path_input, String path_output) throws ClassNotFoundException,
+			IllegalArgumentException, SecurityException, IllegalAccessException, IOException {
+		final ImmutableGraph graph = it.unimi.dsi.webgraph.ImmutableGraph.loadOffline(path_input);
+
+		NodeIterator nodeIterator = graph.nodeIterator();
+		int curr, d;
+		int[] suc;
+
+		BufferedWriter bout = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path_output)));
+
+		long cnt = 0;
+		while (nodeIterator.hasNext()) {
+			curr = nodeIterator.nextInt();
+			d = nodeIterator.outdegree();
+			suc = nodeIterator.successorArray();
+
+			// outStream.print( curr );
+			for (int j = 0; j < d; j++) {
+				bout.write(curr + " " + suc[j] + "\n");
+				++cnt;
+				if (cnt % 1000000 == 0)
+					System.out.println(cnt);
+			}
+			// outStream.println();
+		}
+
+		bout.close();
+		System.out.println("finish");
+	}
+
+	/*
+	 * static public void main( String arg[] ) throws ClassNotFoundException,
+	 * IllegalArgumentException, SecurityException, IllegalAccessException,
+	 * IOException {
+	 * if ( arg.length != 1 ) {
+	 * System.err.println( "Usage: BV2Ascii BASENAME" );
+	 * return;
+	 * }
+	 * 
+	 * process(arg[0]);
+	 * }
+	 */
 }

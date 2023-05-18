@@ -1,4 +1,4 @@
-java -classpath "./bin\
+sudo java -classpath "./bin\
 :./lib/webgraph/webgraph-3.4.2.jar\
 :./lib/webgraph/dsiutils-2.2.2.jar\
 :./lib/webgraph/fastutil-6.6.1.jar\
@@ -31,4 +31,4 @@ java -classpath "./bin\
 :./lib/webgraph/webgraph-deps/wstx-asl-3.2.6.jar\
 :./lib/webgraph/webgraph-deps/concurrent-1.3.4.jar\
 :./lib/webgraph/webgraph-deps/log4j-over-slf4j-1.7.5.jar\
-" txt.TestGeneral ./dataset/enron/enron ./dataset/enron.txt
+" txt.TestGeneral ./example_dataset/enron/enron ./example_dataset/enron.txt
